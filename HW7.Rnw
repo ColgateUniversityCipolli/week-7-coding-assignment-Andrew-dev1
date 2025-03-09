@@ -23,7 +23,29 @@
 <<size="scriptsize">>=
 pois.prob <- function(x, size, prob, type="<="){
   # Use dpois and ppois to conditionally return the correct probability
+  lambda = prob* size
+  if(type == "="){
+    return(dpois(x=x, lambda = lambda))
+  }else if(type == "!="){
+    return(1 - dpois(x=x, lambda = lambda))
+  }else if(type == "<"){
+    return(ppois(q=(x-1), lambda = lambda))
+  }else if(type == ">"){
+    return(1 - ppois(q=x, lambda = lambda))
+  }else if(type == ">="){
+    return(1 - ppois(q=(x-1), lambda = lambda))
+  }else if(type == "<="){
+    return(ppois(q=x, lambda = lambda))
+  }
+  
 }
+#testing all
+pois.prob(5, 10, 0.5, type = "=")
+pois.prob(5, 10, 0.5, type = "!=")
+pois.prob(5, 10, 0.5, type = ">=")
+pois.prob(5, 10, 0.5, type = "<")
+pois.prob(5, 10, 0.5, type = "<=")
+pois.prob(5, 10, 0.5, type = ">")
 @
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Question 2
@@ -33,9 +55,34 @@ pois.prob <- function(x, size, prob, type="<="){
     for a beta distribution. Enable the user to specify the shape parameters
     $\alpha$ and $\beta$.
 <<size="scriptsize">>=
+# beta dist uses a(prob of occuring) and b(prob of not)
 beta.prob <- function(x, size, prob, type="<="){
   # Use dbeta and pbeta to conditionally return the correct probability
+  a = prob* size
+  b = size *(1-prob)
+  if(type == "="){
+    return(dbeta(x = x, a, b))
+  }else if(type == "!="){
+    return(1 - dbeta(x = x, a, b))
+  }else if(type == "<"){
+    return(pbeta(q = x, a, b))
+  }else if(type == ">"){
+    return(1 - pbeta(q = x, a, b))
+  }else if(type == ">="){
+    return(1 - pbeta(q = x, a, b))
+  }else if(type == "<="){
+    return(pbeta(q = x, a, b))
+  }
+  
 }
+
+beta.prob(0.3, 10, 0.3, type = "=")
+beta.prob(0.3, 10, 0.3, type = "!=")
+beta.prob(0.3, 10, 0.3, type = ">")
+beta.prob(0.3, 10, 0.3, type = "<=")
+beta.prob(0.3, 10, 0.3, type = "<")
+beta.prob(0.3, 10, 0.3, type = ">=")
+
 @
 \end{enumerate}
 \bibliography{bibliography}
