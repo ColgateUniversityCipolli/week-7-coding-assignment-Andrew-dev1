@@ -70,6 +70,7 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item Write a \texttt{pois.prob()} function that computes $P(X=x)$, 
     $P(X \neq x)$, $P(X<x)$, $P(X \leq x)$, $P(X > x)$, and $P(X \geq x).$ Enable the user to specify the rate parameter $\lambda$.
+\textbf{Solution: The poisson probability can be calculated for different expressions. The less than probability can be found by taking the cumulative probability of the discrete value one less than the current. }
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -136,6 +137,7 @@
     $P(X \neq x)$, $P(X<x)$, $P(X \leq x)$, $P(X > x)$, and $P(X \geq x)$
     for a beta distribution. Enable the user to specify the shape parameters
     $\alpha$ and $\beta$.
+
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -145,9 +147,9 @@
   \hldef{a} \hlkwb{=} \hldef{prob}\hlopt{*} \hldef{size}
   \hldef{b} \hlkwb{=} \hldef{size} \hlopt{*}\hldef{(}\hlnum{1}\hlopt{-}\hldef{prob)}
   \hlkwa{if}\hldef{(type} \hlopt{==} \hlsng{"="}\hldef{)\{}
-    \hlkwd{return}\hldef{(}\hlkwd{dbeta}\hldef{(}\hlkwc{x} \hldef{= x, a, b))}
+    \hlkwd{return}\hldef{(}\hlnum{0}\hldef{)}
   \hldef{\}}\hlkwa{else if}\hldef{(type} \hlopt{==} \hlsng{"!="}\hldef{)\{}
-    \hlkwd{return}\hldef{(}\hlnum{1} \hlopt{-} \hlkwd{dbeta}\hldef{(}\hlkwc{x} \hldef{= x, a, b))}
+    \hlkwd{return}\hldef{(}\hlnum{1}\hldef{)}
   \hldef{\}}\hlkwa{else if}\hldef{(type} \hlopt{==} \hlsng{"<"}\hldef{)\{}
     \hlkwd{return}\hldef{(}\hlkwd{pbeta}\hldef{(}\hlkwc{q} \hldef{= x, a, b))}
   \hldef{\}}\hlkwa{else if}\hldef{(type} \hlopt{==} \hlsng{">"}\hldef{)\{}
@@ -159,16 +161,17 @@
   \hldef{\}}
 
 \hldef{\}}
+
 \hlkwd{beta.prob}\hldef{(}\hlnum{0.3}\hldef{,} \hlnum{10}\hldef{,} \hlnum{0.3}\hldef{,} \hlkwc{type} \hldef{=} \hlsng{"="}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] 2.668279
+## [1] 0
 \end{verbatim}
 \begin{alltt}
 \hlkwd{beta.prob}\hldef{(}\hlnum{0.3}\hldef{,} \hlnum{10}\hldef{,} \hlnum{0.3}\hldef{,} \hlkwc{type} \hldef{=} \hlsng{"!="}\hldef{)}
 \end{alltt}
 \begin{verbatim}
-## [1] -1.668279
+## [1] 1
 \end{verbatim}
 \begin{alltt}
 \hlkwd{beta.prob}\hldef{(}\hlnum{0.3}\hldef{,} \hlnum{10}\hldef{,} \hlnum{0.3}\hldef{,} \hlkwc{type} \hldef{=} \hlsng{">"}\hldef{)}

@@ -20,6 +20,7 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item Write a \texttt{pois.prob()} function that computes $P(X=x)$, 
     $P(X \neq x)$, $P(X<x)$, $P(X \leq x)$, $P(X > x)$, and $P(X \geq x).$ Enable the user to specify the rate parameter $\lambda$.
+\textbf{Solution: The poisson probability can be calculated for different expressions. The less than probability can be found by taking the cumulative probability of the discrete value one less than the current. }
 <<size="scriptsize">>=
 pois.prob <- function(x, size, prob, type="<="){
   # Use dpois and ppois to conditionally return the correct probability
@@ -54,6 +55,7 @@ pois.prob(5, 10, 0.5, type = ">")
     $P(X \neq x)$, $P(X<x)$, $P(X \leq x)$, $P(X > x)$, and $P(X \geq x)$
     for a beta distribution. Enable the user to specify the shape parameters
     $\alpha$ and $\beta$.
+
 <<size="scriptsize">>=
 # beta dist uses a(prob of occuring) and b(prob of not)
 beta.prob <- function(x, size, prob, type="<="){
@@ -61,9 +63,9 @@ beta.prob <- function(x, size, prob, type="<="){
   a = prob* size
   b = size *(1-prob)
   if(type == "="){
-    return(dbeta(x = x, a, b))
+    return(0)
   }else if(type == "!="){
-    return(1 - dbeta(x = x, a, b))
+    return(1)
   }else if(type == "<"){
     return(pbeta(q = x, a, b))
   }else if(type == ">"){
